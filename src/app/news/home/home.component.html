@@ -1,0 +1,130 @@
+<mat-card class="impression">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">stacked_line_chart</mat-icon> 
+    <h1>AVG Impression</h1><br>
+    <h2>2.480</h2><br>
+    <h3>+10.80%</h3>
+</mat-card>
+<mat-card class="engagement"> 
+    <mat-icon aria-hidden="false" aria-label="Example home icon">article</mat-icon> 
+    <h1>AVG Engagements</h1><br>
+    <h2>10.290</h2><br>
+    <h3>+05.80%</h3>
+</mat-card>
+<mat-card class="reach"> 
+    <mat-icon aria-hidden="false" aria-label="Example home icon">swap_vert</mat-icon> 
+    <h1>AVG Reach</h1><br>
+    <h2>4.215</h2><br>
+    <h3>-10.80%</h3>
+</mat-card>
+<mat-card class="growth">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">assessment</mat-icon> 
+    <h1>News Growth</h1><br>
+    <h2>230</h2><br>
+    <h3>+10.80%</h3> </mat-card>
+<mat-card class="histogram">
+    <div class="chart">
+        <highcharts-chart
+            [Highcharts] = "Highcharts" 
+            [options] = "chartOptions"
+            style = "width: 100%; height: 400px; display: block;">
+        </highcharts-chart>
+    </div>
+ </mat-card>
+
+ <mat-card class="chart-detail">
+    <div class="bulan">
+        <h1>Januari</h1>
+        <h1>Februari</h1>
+        <h1>Maret</h1>
+        <h1>April</h1>
+        <h1>Mei</h1>
+        <h1>Juni</h1>
+        <h1>Juli</h1>
+        <h1>Agustus</h1>
+        <h1>September</h1>
+        <h1>Oktober</h1>
+        <h1>November</h1>
+        <h1>Desember</h1>
+    </div>
+    <div class="jumlah">
+        <h2>50</h2><br>
+        <h2>27</h2><br>
+        <h2>74</h2><br>
+        <h2>68</h2><br>
+        <h2>110</h2><br>
+        <h2>70</h2><br>
+        <h2>55</h2><br>
+        <h2>50</h2><br>
+        <h2>90</h2><br>
+        <h2>80</h2><br>
+        <h2>60</h2><br>
+        <h2>76</h2>
+    </div>
+ </mat-card>
+
+<mat-card class="media"> 
+    <h1>Media</h1>
+    <div class="donat" style="display: block">
+        <canvas mdbChart
+            [chartType]="chartType"
+            [datasets]="chartDatasets"
+            [labels]="chartLabels"
+            [colors]="chartColors"
+            [options]="chartOption"
+            [legend]="false"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+        </canvas>
+      </div>
+</mat-card>
+<mat-card class="news-upload">
+    <span>News Upload</span><br>
+    <table mat-table [dataSource]="dataSource" class="mat-z8">
+
+    <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+
+    <!-- News Column -->
+    <ng-container matColumnDef="news">
+        <th mat-header-cell *matHeaderCellDef> News </th>
+        <td mat-cell *matCellDef="let element"> {{element.news}} </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+
+    <!-- Source Column -->
+    <ng-container matColumnDef="source">
+        <th mat-header-cell *matHeaderCellDef> Source </th>
+        <td mat-cell *matCellDef="let element"> {{element.source}} </td>
+    </ng-container>
+
+    <!-- View Column -->
+    <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef> View </th>
+        <td mat-cell *matCellDef="let element"> {{element.view}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table> 
+</mat-card>
+
+<mat-card class="topic"> 
+    <span>My Topic</span><br><br>
+    <span>Koruptor</span> <mat-icon class="koruptor" aria-hidden="false" aria-label="Example home icon">text_snippet</mat-icon><br>
+    <span>Bansos</span> <mat-icon class="bansos" aria-hidden="false" aria-label="Example home icon">text_snippet</mat-icon><br>
+    <span>FSBI</span> <mat-icon class="fsbi" aria-hidden="false" aria-label="Example home icon">text_snippet</mat-icon><br>
+
+</mat-card>
+

@@ -1,0 +1,60 @@
+<h3 mat_dialog-title>Add News</h3>
+
+<div mat-dialog-content>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Title News</mat-label>
+        <input matInput [(ngModel)]="data.title_news">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="data.date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Content Text</mat-label>
+        <input matInput [(ngModel)]="data.content_text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Image</mat-label>
+        <input matInput [(ngModel)]="data.link_image">
+    </mat-form-field>
+
+    <form class="channel">
+    <h1>Channel</h1>
+        <div class="radio">
+            <input class="form-controll" [(ngModel)]="data.media_name" value="cnbc" type="radio" name="flexRadioDefault"
+            id="radio1">
+            <label class="form-check" for="flexRadioDefault1">CNBC</label>
+        </div>
+        <div class="radio">
+            <input class="form-controll" [(ngModel)]="data.media_name" value="marketWatch" type="radio" name="flexRadioDefault"
+            id="radio2">
+            <label class="form-check" for="flexRadioDefault1">Market Watch</label>
+        </div>
+        <div class="radio">
+            <input class="form-controll" [(ngModel)]="data.media_name" value="yahooEntertaiment" type="radio" name="flexRadioDefault"
+            id="radio3">
+            <label class="form-check" for="flexRadioDefault1">Yahoo Entertaiment</label>
+        </div>
+        <div class="radio">
+            <input class="form-controll" [(ngModel)]="data.media_name" value="usaToday" type="radio" name="flexRadioDefault"
+            id="radio4">
+            <label class="form-check" for="flexRadioDefault1">USA Today</label>
+        </div>
+        <div class="radio">
+            <input class="form-controll" [(ngModel)]="data.media_name" value="googleNews" type="radio" name="flexRadioDefault"
+            id="radio5">
+            <label class="form-check" for="flexRadioDefault1">Google News</label>
+        </div>
+        <div class="radio">
+            <input class="form-controll" [(ngModel)]="data.media_name" value="reuters" type="radio" name="flexRadioDefault"
+            id="radio6">
+            <label class="form-check" for="flexRadioDefault1">Reuters</label>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+<button mat-button mat-dialog-close>Cancel</button>
+<button mat-flat-button (click)="saveData()">Save</button>
+</div>

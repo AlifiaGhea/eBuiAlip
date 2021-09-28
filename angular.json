@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "2fbcd768-3b8f-46d2-a141-16e0575f63ca"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -31,21 +34,32 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
+              "node_modules/animate.css/animate.css",
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/hammerjs/hammer.min.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
+                  "maximumWarning": "10kb",
                   "maximumError": "4kb"
                 }
               ],
@@ -99,6 +113,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []

@@ -1,0 +1,54 @@
+<body style="height: 800px; margin-left: -20px; margin-top: -20px; width: 1020px;">
+    <!--Content-->
+                
+    <div class="top-content-container"  >
+        <button class="add" mat-flat-button color="primary" (click)="addTwitter({}, -1)">Add Twitt</button>
+
+        <div class="content" >
+            <div fxLayout="row wrap" fxLayoutGap="16px"></div>
+            <div fxLayout="row wrap">
+            <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let twitter of twitterAll | paginate : {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+            }; 
+            let idx=index">
+                <mat-card class="mat-elevation-z4" >
+                    <div class="image_profil">
+                        <img src="{{twitter.image_profil}}" alt="" style="width: 100%;">
+                    </div>
+                    <div class="username">
+                        <h2>{{(twitter.name.length>10)? 
+                            (twitter.name | slice:0:10)+'..':
+                            (twitter.name) }}</h2>
+                        <h1>{{twitter.username}}</h1>
+                    </div>
+                    <div class="text">
+                        <p>
+                            {{(twitter.text.length>50)? 
+                                (twitter.text | slice:0:50)+'..':
+                                (twitter.text) }}
+                        </p>
+                    </div>
+                    <div class="image">
+                        <img mat-card-image src="{{twitter.image}}" alt="" style="width: 100%;">
+                    </div>
+                <mat-card-actions>
+                    <button class="update" mat-button color="primary" (click)="addTwitter(twitter,idx)">Update</button>
+                    <button class="delete" mat-button color="warn" (click)="deleteTwitter(twitter.id, idx)">Delete</button>
+                </mat-card-actions>
+                </mat-card>
+            </div>
+            </div>
+        </div>
+        <div class="pagination">
+            <pagination-controls  
+            previousLabel="Prev" 
+            nextLabel="Next" 
+            (pageChange)="onTableDataChange($event)">
+            </pagination-controls>
+        </div>
+    </div>
+</body>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,40 @@
+<h3 mat_dialog-title>Add Employee</h3>
+
+<div mat-dialog-content>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>First Name</mat-label>
+        <input matInput [(ngModel)]="data.first_name">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Last Name</mat-label>
+        <input matInput [(ngModel)]="data.last_name">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="data.email">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Phone</mat-label>
+        <input matInput [(ngModel)]="data.phone">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Organization</mat-label>
+        <input matInput [(ngModel)]="data.organization">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Designation</mat-label>
+        <input matInput [(ngModel)]="data.designation">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Salary</mat-label>
+        <input matInput [(ngModel)]="data.salary">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Image</mat-label>
+        <input matInput [(ngModel)]="data.link_image">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+<button mat-button mat-dialog-close>Cancel</button>
+<button mat-flat-button (click)="saveData()">Save</button>
+</div>

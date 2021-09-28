@@ -1,0 +1,91 @@
+<body style="height: 850px; margin-left: -20px; margin-top: -20px; width: 1020px;">
+        <div class="top-content-container">
+            <button class="add" mat-flat-button color="primary" (click)="addNews({}, -1)">Add News</button>
+
+            <h1>Explore Channel</h1>
+            <mat-card class="cnbc"> 
+              <img  src="https://cdn.cnbcindonesia.com/cnbc/images/logo_hitam.png?w=650" alt="" style="width: 50%; margin-left: 27px; margin-top: -16px;">
+              <h1>CNBC news</h1>
+              <h2>30.2K</h2>
+            </mat-card>
+
+            <mat-card class="marketwatch">  
+              <img  src="https://logowik.com/content/uploads/images/marketwatch6311.jpg" alt="" style="width: 100%; margin-left: 2px; margin-top: -16px;">
+              <h1>Market Watch</h1>
+              <h2>40.2K</h2>
+            </mat-card>
+
+            <mat-card class="yahooentertaiment">  
+              <img  src="https://s3.amazonaws.com/cms.ipressroom.com/354/files/20199/5d93cb5b2cfac24cf29b87cf_entertainment-en-US-h-rgb/entertainment-en-US-h-rgb_7c09ac9c-f6c6-4997-ba8d-68628fb333e6-prv.jpg" alt="" style="width: 150%; margin-left: 2px; margin-top: -16px;">
+              <h1>Yahoo Entertaiment</h1>
+              <h2>15.2K</h2>
+            </mat-card>
+
+            <mat-card class="usatoday"> 
+              <img  src="https://cdn.freelogovectors.net/svg07/usa-today-logo.svg" alt="" style="width: 50%; margin-left: 25px; margin-top: -12px;">
+              <h1>USA Today</h1>
+              <h2>30.2K</h2>
+            </mat-card>
+
+            <mat-card class="googlenews">  
+              <img  src="https://bergasku.com/wp-content/uploads/2021/02/Google-News.png" alt="" style="width: 100%; margin-left: 5px; margin-top: -16px;">
+              <h1>Google News</h1>
+              <h2>37.2K</h2>
+            </mat-card>
+
+            <mat-card class="reuters"> 
+              <img  src="https://s3.reutersmedia.net/resources/r/?m=02&d=20180323&t=2&i=1244109897&w=&fh=545px&fw=&ll=&pl=&sq=&r=LYNXMPEE2M1VN" alt="" style="width: 100%; margin-left: 5px; margin-top: -16px;">
+              <h1>Reuters</h1>
+              <h2>7.2K</h2>
+            </mat-card><br>
+
+            <h2>Headline</h2>
+            <div class="content" style="padding-bottom: 60px;">
+                <div fxLayout="row wrap" fxLayoutGap="0px"></div>
+                <div fxLayout="row wrap">
+                  <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let news of newsAll | paginate : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                }; 
+                let idx=index">
+                    <mat-card class="mat-elevation-z4" >
+                        <div class="image">
+                          <img  src="{{news.link_image}}" alt="" style="width: 100%;">
+                        </div>
+                        <div class="title">
+                          <h1>{{ (news.title_news.length>25)? 
+                            (news.title_news | slice:0:25)+'..':
+                            (news.title_news) }}</h1>
+                          <p>{{ (news.content_text.length>50)? 
+                            (news.content_text | slice:0:50)+'..':
+                            (news.content_text) }}</p>
+                        </div>
+                        <div class="media">
+                          <h2>{{news.media_name}}</h2>
+                        </div>
+                        <div class="date">
+                          <h3>{{ (news.date.length>10)? 
+                            (news.date | slice:0:10):
+                            (news.date) }}</h3>
+                        </div>
+                      <mat-card-actions>
+                        <button class="update" mat-button color="primary" (click)="addNews(news,idx)">Update</button>
+                        <button class="delete" mat-button color="warn" (click)="deleteNews(news.id, idx)">Delete</button>
+                        </mat-card-actions>
+                      </mat-card>
+                  </div>
+                </div>
+             </div>
+             <div class="pagination">
+              <pagination-controls  
+                previousLabel="Prev" 
+                nextLabel="Next" 
+                (pageChange)="onTableDataChange($event)">
+              </pagination-controls>
+            </div>
+        </div>
+</body>
+
+<router-outlet></router-outlet>
+
