@@ -15,7 +15,7 @@ export class EmployeeComponent implements OnInit {
   tableSizes = [3, 6, 9, 12];
 
   title:any;
-  employee:any={};
+  employees:any=[];
 
   employeeAll:any=[];
 
@@ -25,9 +25,9 @@ export class EmployeeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.title='Employee';
+    this.title='';
     //3. Memanggil fungsi getEmployee1()
-    this.getEmployeeAll();
+    this.retrieveEmployees();
 
     // this.employee={
     //   id: '1',
@@ -40,15 +40,50 @@ export class EmployeeComponent implements OnInit {
     
   }
 
+  getRequestParams(searchTitle:string, page:number, tableSize:number): any {
+    // tslint:disable-next-line:prefer-const
+    let params:any = {};
+
+    if (searchTitle) {
+      params[`first_name`] = searchTitle;
+    }
+
+    if (page) {
+      params[`page`] = page - 1;
+    }
+
+    if (tableSize) {
+      params[`size`] = tableSize;
+    }
+
+    return params;
+  }
+
+  retrieveEmployees(): void {
+    const params = this.getRequestParams(this.title, this.page, this.tableSize);
+
+    this.api.getAll(params,'employee')
+      .subscribe(
+        response => {
+          const { employees, totalItems } = response;
+          this.employees = employees;
+          this.count = totalItems;
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
   onTableDataChange(event:any){
     this.page = event;
-    this.getEmployeeAll();
+    this.retrieveEmployees();
   }  
 
   onTableSizeChange(event:any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.getEmployeeAll();
+    this.retrieveEmployees();
   }  
 
  //2.

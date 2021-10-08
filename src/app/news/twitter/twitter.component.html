@@ -2,12 +2,29 @@
     <!--Content-->
                 
     <div class="top-content-container"  >
+        <div class="search">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search by title"
+              [(ngModel)]="title"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="retrieveTwitters()"
+              >
+                Search
+              </button>
+            </div>
+          </div>
         <button class="add" mat-flat-button color="primary" (click)="addTwitter({}, -1)">Add Twitt</button>
 
         <div class="content" >
             <div fxLayout="row wrap" fxLayoutGap="16px"></div>
             <div fxLayout="row wrap">
-            <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let twitter of twitterAll | paginate : {
+            <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let twitterLoop of twitters | paginate : {
                 itemsPerPage: tableSize,
                 currentPage: page,
                 totalItems: count
@@ -15,27 +32,27 @@
             let idx=index">
                 <mat-card class="mat-elevation-z4" >
                     <div class="image_profil">
-                        <img src="{{twitter.image_profil}}" alt="" style="width: 100%;">
+                        <img src="{{twitterLoop.image_profil}}" alt="" style="width: 100%;">
                     </div>
                     <div class="username">
-                        <h2>{{(twitter.name.length>10)? 
-                            (twitter.name | slice:0:10)+'..':
-                            (twitter.name) }}</h2>
-                        <h1>{{twitter.username}}</h1>
+                        <h2>{{(twitterLoop.name.length>10)? 
+                            (twitterLoop.name | slice:0:10)+'..':
+                            (twitterLoop.name) }}</h2>
+                        <h1>{{twitterLoop.username}}</h1>
                     </div>
                     <div class="text">
                         <p>
-                            {{(twitter.text.length>50)? 
-                                (twitter.text | slice:0:50)+'..':
-                                (twitter.text) }}
+                            {{(twitterLoop.text.length>50)? 
+                                (twitterLoop.text | slice:0:50)+'..':
+                                (twitterLoop.text) }}
                         </p>
                     </div>
                     <div class="image">
-                        <img mat-card-image src="{{twitter.image}}" alt="" style="width: 100%;">
+                        <img mat-card-image src="{{twitterLoop.image}}" alt="" style="width: 100%;">
                     </div>
                 <mat-card-actions>
-                    <button class="update" mat-button color="primary" (click)="addTwitter(twitter,idx)">Update</button>
-                    <button class="delete" mat-button color="warn" (click)="deleteTwitter(twitter.id, idx)">Delete</button>
+                    <button class="update" mat-button color="primary" (click)="addTwitter(twitterLoop,idx)">Update</button>
+                    <button class="delete" mat-button color="warn" (click)="deleteTwitter(twitterLoop.id, idx)">Delete</button>
                 </mat-card-actions>
                 </mat-card>
             </div>

@@ -1,33 +1,59 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  serverUrl='http://192.168.29.91:5000/api/v1';
+//  serverUrl='http://192.168.29.91:5000/api/v1';
+serverUrl='http://localhost:8080/api/';
 
   constructor(
     public http:HttpClient
   ) { }
 
-  get(url:any)
+  get(baseUrl:any)
   {
-    return this.http.get(this.serverUrl + url);
+    return this.http.get(this.serverUrl + baseUrl);
   }
 
-  post(url:any,data:any)
+  post(baseUrl:any,data:any)
   {
-    return this.http.post(this.serverUrl+url,data);
+    return this.http.post(this.serverUrl+baseUrl,data);
   }
 
-  put(url:any, data:any)
+  put(baseUrl:any, data:any)
   {
-    return this.http.put(this.serverUrl+url, data);
+    return this.http.put(this.serverUrl+baseUrl, data);
   }
 
-  delete(url:any)
+  delete(baseUrl:any)
   {
-    return this.http.delete(this.serverUrl+url);
+    return this.http.delete(this.serverUrl+baseUrl);
+  }
+
+  getAll(params:any, baseUrl:any): Observable<any> {
+    return this.http.get(this.serverUrl+baseUrl, { params });
+  }
+
+  get2(id:any, baseUrl:any): Observable<any> {
+    return this.http.get(`${this.serverUrl+baseUrl}/${id}`);
+  }
+
+  create(data:any, baseUrl:any): Observable<any> {
+    return this.http.post(this.serverUrl+baseUrl, data);
+  }
+
+  update(id:any, data:any, baseUrl:any): Observable<any> {
+    return this.http.put(`${this.serverUrl+baseUrl}/${id}`, data);
+  }
+
+  delete2(id:any, baseUrl:any): Observable<any> {
+    return this.http.delete(`${this.serverUrl+baseUrl}/${id}`);
+  }
+
+  deleteAll(baseUrl:any): Observable<any> {
+    return this.http.delete(this.serverUrl+baseUrl);
   }
 }

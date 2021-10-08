@@ -15,7 +15,7 @@ export class TwitterComponent implements OnInit {
   tableSizes = [3, 6, 9, 12];
 
   title:any;
-  twitter:any={};
+  twitters:any=[];
 
   twitterAll:any=[];
 
@@ -25,21 +25,56 @@ export class TwitterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.title='twitter';
+    this.title='';
 
-    this.getTwitterAll();
+    this.retrieveTwitters();
     
+  }
+
+  getRequestParams(searchTitle:string, page:number, tableSize:number): any {
+    // tslint:disable-next-line:prefer-const
+    let params:any = {};
+
+    if (searchTitle) {
+      params[`username`] = searchTitle;
+    }
+
+    if (page) {
+      params[`page`] = page - 1;
+    }
+
+    if (tableSize) {
+      params[`size`] = tableSize;
+    }
+
+    return params;
+  }
+
+  retrieveTwitters(): void {
+    const params = this.getRequestParams(this.title, this.page, this.tableSize);
+
+    this.api.getAll(params,'twitter')
+      .subscribe(
+        response => {
+          const { twitters, totalItems } = response;
+          this.twitters = twitters;
+          this.count = totalItems;
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   onTableDataChange(event:any){
     this.page = event;
-    this.getTwitterAll();
+    this.retrieveTwitters();
   }  
 
   onTableSizeChange(event:any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.getTwitterAll();
+    this.retrieveTwitters();
   }  
 
  //2.

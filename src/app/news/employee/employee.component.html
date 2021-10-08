@@ -2,31 +2,48 @@
     <!--Content-->
             
     <div class="top-content-container">
+        <div class="search">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search by title"
+              [(ngModel)]="title"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="retrieveEmployees()"
+              >
+                Search
+              </button>
+            </div>
+          </div>
         <button class="add" mat-flat-button color="primary" (click)="addEmployee({}, -1)">Add Employee</button>
 
         <div class="content">
             <div fxLayout="row wrap" fxLayoutGap="20px"></div>
             <div fxLayout="row wrap">
-            <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let employee of employeeAll | paginate : {
+            <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let employeeLoop of employees | paginate : {
                 itemsPerPage: tableSize,
                 currentPage: page,
                 totalItems: count
             }; 
             let idx=index">
                 <mat-card class="mat-elevation-z4" >
-                    <img class="image" src="{{employee.link_image}}" alt="">
+                    <img class="image" src="{{employeeLoop.link_image}}" alt="">
                 <mat-card-header>
                     
-                    <mat-card-title>{{employee.first_name}} {{employee.last_name}}</mat-card-title>
+                    <mat-card-title>{{employeeLoop.first_name}} {{employeeLoop.last_name}}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                     <p>
-                        {{employee.email}}
+                        {{employeeLoop.email}}
                     </p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button class="update" mat-button color="primary" (click)="addEmployee(employee,idx)">Update</button>
-                    <button class="delete" mat-button color="warn" (click)="deleteEmployee(employee.id, idx)">Delete</button>
+                    <button class="update" mat-button color="primary" (click)="addEmployee(employeeLoop,idx)">Update</button>
+                    <button class="delete" mat-button color="warn" (click)="deleteEmployee(employeeLoop.id, idx)">Delete</button>
                 </mat-card-actions>
                 </mat-card>
             </div>

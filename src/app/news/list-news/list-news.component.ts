@@ -15,7 +15,7 @@ export class ListNewsComponent implements OnInit {
   tableSizes = [3, 6, 9, 12];
 
   title:any;
-  news:any={};
+  newss:any=[];
   //1. buat koleksi news
   newsAll:any=[];
 
@@ -26,31 +26,57 @@ export class ListNewsComponent implements OnInit {
     
    }
 
-  ngOnInit(): void {
-    this.title='News';
+   ngOnInit(): void {
+    this.title='';
     //3. Memanggil fungsi getNews1()
-    this.getNewsAll();
-
-    this.news={
-      id: '1',
-      title_news: 'Spongebob',
-      media_news: 'Bikini Bottom News',
-      date: '2021-08-16',
-      content_text: 'Patrick menikah dengan tiang listrik',
-      link_image: 'ahsj.jpg'
-    };
+    this.retrieveNewss();
     
+  }
+
+  getRequestParams(searchTitle:string, page:number, tableSize:number): any {
+    // tslint:disable-next-line:prefer-const
+    let params:any = {};
+
+    if (searchTitle) {
+      params[`title_news`] = searchTitle;
+    }
+
+    if (page) {
+      params[`page`] = page - 1;
+    }
+
+    if (tableSize) {
+      params[`size`] = tableSize;
+    }
+
+    return params;
+  }
+
+  retrieveNewss(): void {
+    const params = this.getRequestParams(this.title, this.page, this.tableSize);
+
+    this.api.getAll(params,'news')
+      .subscribe(
+        response => {
+          const { newss, totalItems } = response;
+          this.newss = newss;
+          this.count = totalItems;
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   onTableDataChange(event:any){
     this.page = event;
-    this.getNewsAll();
+    this.retrieveNewss();
   }  
 
   onTableSizeChange(event:any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.getNewsAll();
+    this.retrieveNewss();
   }  
 
  //2.
